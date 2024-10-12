@@ -2,6 +2,13 @@ import matplotlib.pyplot as plt
 import requests
 import os
 
+
+
+latex_code = r'\frac{a}{b} = c'
+webhook_url = 'webhook'
+
+
+
 def create_latex_image(latex_code, filename='latex_image.png'):
     plt.figure(figsize=(5, 2))
     plt.text(0.5, 0.5, f"${latex_code}$", fontsize=20, ha='center', va='center')
@@ -17,11 +24,13 @@ def send_image_to_discord(webhook_url, image_path):
         )
     return response.status_code, response.content
 
-latex_code = r'\frac{a}{b} = c'
-webhook_url = 'YOUR_DISCORD_WEBHOOK_URL'
 
 create_latex_image(latex_code)
 status_code, response_content = send_image_to_discord(webhook_url, 'latex_image.png')
 os.remove('latex_image.png')
 
+
+
 print(f'Status Code: {status_code}, Response: {response_content}')
+
+
